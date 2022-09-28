@@ -2,14 +2,15 @@
 #include <iostream>
 using namespace std;
 
-class ToPiNumber {
+class SquareNumber {
     private:
         double nmb;
 
     public:
-        ToPiNumber(double num) {
-            nmb = 3.1415926;
-        }
+        SquareNumber(double num) {
+            nmb = pow(num, 2);
+        }  
+    friend ostream& operator << (std::ostream& out, SquareNumber num);
 };
 
 class DoubleNumber {
@@ -35,7 +36,7 @@ class DoubleNumber {
             return *this;
         }
 
-        bool operator> (DoubleNumber& rightNum) {     // overdrive ">" operator 
+        bool operator > (DoubleNumber& rightNum) {     // overdrive ">" operator 
             return number > rightNum.number;
         }
 
@@ -46,12 +47,16 @@ class DoubleNumber {
         friend void operator -- (DoubleNumber& num, int);
         friend DoubleNumber operator + (DoubleNumber leftNum, DoubleNumber rightNum);
         friend ostream& operator << (std::ostream& out, DoubleNumber num);
-        friend int ToInt(DoubleNumber num);
 
-        ToPiNumber ToPi() {
-            return ToPiNumber(number);
+        int ToInt() {
+            return int(number);
         }
-          
+
+        SquareNumber ToSquare() {
+            return SquareNumber(number);
+        }
+
+        friend class SquareNumber;
 };
 
 void operator -- (DoubleNumber& num, int) { 
@@ -66,8 +71,8 @@ ostream& operator << (std::ostream& out, DoubleNumber num) {
     return out << num.number;
 }
 
-int ToInt(DoubleNumber num) {
-    return int(num.number);
+ostream& operator << (std::ostream& out, SquareNumber num) {
+    return out << num.nmb;
 }
 
 string BoolToString(bool par) {
@@ -78,22 +83,26 @@ int main()
 {
     DoubleNumber one(19.12);
     DoubleNumber two(7.978);
+
     cout << "One = " << one << endl;
-    cout << "Two = " << two << endl;
+    cout << "Two = " << two << endl << endl;
 
-    cout << "Two to int = " << ToInt(two) << endl;
+    int p = two.ToInt();
+    cout << "Two to int = " << p << endl;
 
-    one = one + two;
-    cout << "One + Two = " << one << endl;
+    one++;
+    cout << "One increment = " << one << endl;
+
+    cout << "One + Two = " << one + two << endl;
 
     two--;
     cout << "Two decrement = " << two << endl;
 
-    bool isTrue = two > one;
+    bool isTrue = one > two;
     cout << "Is One bigger than Two? " << BoolToString(isTrue) << endl;
 
-    ToPiNumber pi = one.ToPi();;
-    printf("One to pi = %f", pi);
+    SquareNumber pow = one.ToSquare();
+    cout << "Square one = " << pow << endl;
 
     return 0;
 }
