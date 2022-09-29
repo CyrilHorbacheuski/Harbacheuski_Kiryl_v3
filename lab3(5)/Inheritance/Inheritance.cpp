@@ -22,7 +22,6 @@ class Programmer : public virtual Workman {
 protected:
     string language;
 public:
-    Programmer() {};
     Programmer(string _prof, string _lang) {
         language = _lang;
         profession = _prof;
@@ -38,7 +37,6 @@ class Frontend : public Programmer {
 protected:
     string framework;
 public:
-    Frontend() {};
     Frontend(string _prof, string _lang, string _frame) : Programmer(_prof, _lang) {
         framework = _frame;
     }
@@ -53,8 +51,6 @@ class Designer : public virtual Workman {
 protected:
     string department;
 public:
-    Designer() {}
-
     Designer(string _prof, string _dep) : Workman(_prof) {
         profession = _prof;
         department = _dep;
@@ -70,8 +66,6 @@ class WebDesigner : public Designer {
 protected:
     int stage;
 public:
-    WebDesigner() {}
-
     WebDesigner(int _stage, string _prof, string _dep) : Designer(_prof, _dep) {
         stage = _stage;
     }
@@ -87,7 +81,6 @@ class SiteDeveloper : public Frontend, public WebDesigner {
 protected:
     string companyName;
 public:
-    SiteDeveloper() {};
     SiteDeveloper(string _cmpName, string _prof, string _frame, int _stage, string _dep, string _lang) 
     :Frontend(_prof, _lang, _frame), WebDesigner(_stage, _prof, _dep) {
         companyName = _cmpName;
