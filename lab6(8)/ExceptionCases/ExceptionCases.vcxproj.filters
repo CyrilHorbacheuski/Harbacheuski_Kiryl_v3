@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="HelloWorld.cpp">
+    <ClCompile Include="ExceptionCases.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

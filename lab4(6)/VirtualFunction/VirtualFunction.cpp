@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 using namespace std;
-class Workman {
+
+class Workman { // abstract class
 protected:
 	string name;
 
@@ -11,9 +12,7 @@ public:
 	}
 	virtual ~Workman() {}
 
-	virtual void print() { 
-		cout << "Name: " << name << endl;
-	}
+	virtual void print() = 0; // clear virtual function;
 };
 
 class Builder : public Workman {
@@ -37,7 +36,7 @@ public:
 		roadKM = _km;
 	}
 	void print() { 
-		cout << "I am " << name << ". I builded " << roadKM << " km of roads." << endl; 
+		cout << "I am " << name << "Stage - " << stage <<  ". I builded " << roadKM << " km of roads." << endl; 
 	} 
 	~RoadBuilder() {}
 };
@@ -61,7 +60,7 @@ int main()
 	int countOfElements;
 	cout << "Enter count of elements: ";
 	cin >> countOfElements;
-	Workman **BaseClasses = new Workman*[1];
+	Workman **BaseClasses = new Workman*[countOfElements];
 
 	for (int i = 0; i < countOfElements; i++) {
 		int classType;
@@ -109,7 +108,6 @@ int main()
 	}
 
 	delete[] BaseClasses;
-
 
 	return 0;
 }

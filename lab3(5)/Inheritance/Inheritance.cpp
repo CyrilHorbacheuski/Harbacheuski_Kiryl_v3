@@ -22,7 +22,7 @@ class Programmer : public virtual Workman {
 protected:
     string language;
 public:
-    Programmer(string _prof, string _lang) {
+    Programmer(string _prof, string _lang) : Workman(_prof) {
         language = _lang;
         profession = _prof;
     }
@@ -51,7 +51,7 @@ class Designer : public virtual Workman {
 protected:
     string department;
 public:
-    Designer(string _prof, string _dep) : Workman(_prof) {
+    Designer(string _prof, string _dep): Workman(_prof) {
         profession = _prof;
         department = _dep;
     }
@@ -85,10 +85,11 @@ public:
     :Frontend(_prof, _lang, _frame), WebDesigner(_stage, _prof, _dep) {
         companyName = _cmpName;
     }
+   
 
     ~SiteDeveloper() {}
 
-    void GetCompanyName() {
+    void GetInfo() {
         cout << "Hello, I am " << this->profession << endl;
         cout << "My company's name is " << this->companyName << endl;
         cout << "I write in " << this->language << " (" << this->framework << " framework)" << endl;
@@ -101,7 +102,7 @@ int main() {
     
     SiteDeveloper Paul("SOFT-FX", "frontend developer", "React", 15, "info communication", "JavaScript");
 
-    Paul.GetCompanyName();
+    Paul.GetInfo();
 
     return 0;
 }
